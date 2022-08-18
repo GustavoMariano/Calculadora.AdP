@@ -2,7 +2,7 @@
 
 namespace Calculadora.ConsoleApp
 {
-    class Program
+    public class Program
     {
         #region Requisito Funcional 01 - Somar [OK]
         //Nossa calculadora deve ter a possibilidade de somar dois números
@@ -47,9 +47,9 @@ namespace Calculadora.ConsoleApp
             int contador = 0;
             double primeiroNumero = 0, segundoNumero = 0, resultado = 0;
             string[] historicoOperacoes = new string[10];
-            string opcao = "", operacao = ""; 
+            string opcao = "", operacao = "";
 
-            while(true)
+            while (true)
             {
                 //Exibe o menu
                 MostraMenu();
@@ -69,7 +69,6 @@ namespace Calculadora.ConsoleApp
                 //Verifica
                 if (EhMostrarOperacoesAnteriores(opcao))
                 {
-
                     if (ContadorEhZero(contador))
                     {
                         // Retorna mensagem de erro "Nenhuma operação foi realizada ainda, tente novamente!!" em vermelho e repete
@@ -81,21 +80,16 @@ namespace Calculadora.ConsoleApp
                     MostraOperacoesAnteriores(historicoOperacoes);
 
                     Console.ReadLine();
-
                     Console.Clear();
-
                     continue;
                 }
 
                 //Verifica se o usuário deseja encerrar a aplicação
                 if (EhOpcaoParaSair(opcao))
-                {
                     break;
-                }
 
                 //Solicita ao usuário o PRIMEIRO fator da operação
                 MensagemSolicitandoFator("primeiro");
-
                 primeiroNumero = Convert.ToDouble(Console.ReadLine());
 
                 do
@@ -107,12 +101,10 @@ namespace Calculadora.ConsoleApp
 
                     //Verifica se o segundo fator da divisão é 0 (zero)
                     if (DivisaoSegundoNumeroEhValido(segundoNumero, opcao))
-                    {
                         // Retorna mensagem de erro "Valor inválido, tente novamente" em vermelho e repete
                         MensagemErro("Valor inválido, tente novamente");
 
-                    }
-                }while (DivisaoSegundoNumeroEhValido(segundoNumero, opcao));
+                } while (DivisaoSegundoNumeroEhValido(segundoNumero, opcao));
 
                 //Verifica qual operação foi selecionada pelo usuário
                 VerificaOperacao(primeiroNumero, segundoNumero, ref resultado, opcao, ref operacao);
@@ -125,9 +117,7 @@ namespace Calculadora.ConsoleApp
 
                 //Exibe o resultado da operação
                 Console.WriteLine("Resultado : " + resultado);
-
                 Console.ReadLine();
-
                 Console.Clear();
             }
         }
@@ -137,7 +127,6 @@ namespace Calculadora.ConsoleApp
         {
             Console.WriteLine($"Insira o {fator} número");
         }
-        
 
         private static bool DivisaoSegundoNumeroEhValido(double segundoNumero, string opcao)
         {
@@ -153,7 +142,6 @@ namespace Calculadora.ConsoleApp
         {
             return opcao != "1" && opcao != "2" && opcao != "3" && opcao != "4" && opcao != "5" && opcao != "s" && opcao != "S";
         }
-        
 
         private static void VerificaOperacao(double primeiroNumero, double segundoNumero, ref double resultado, string opcao, ref string operacao)
         {
@@ -167,7 +155,7 @@ namespace Calculadora.ConsoleApp
                     break;
             }
         }
-                
+
         private static bool EhMostrarOperacoesAnteriores(string opcao)
         {
             return opcao == "5";
@@ -183,12 +171,8 @@ namespace Calculadora.ConsoleApp
         private static void MostraOperacoesAnteriores(string[] historicoOperacoes)
         {
             for (int i = 0; i < 10; i++)
-            {
                 if (historicoOperacoes[i] != null)
-                {
                     Console.WriteLine(historicoOperacoes[i]);
-                }
-            }
         }
 
         private static void MensagemErro(String Msg)
